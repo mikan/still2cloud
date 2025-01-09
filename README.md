@@ -5,10 +5,28 @@ still2cloud
 
 Take a still picture from IP camera and upload to Amazon S3 or S3-compatible object storages.
 
+## Download
+
+See [Releases](https://github.com/mikan/still2cloud/releases) page.
+
 ## Usage
+
+Run executable binary:
 
 ```sh
 ./still2cloud -c config.json
+```
+
+Run with Golang toolchain:
+
+```sh
+go run . -c config.json
+```
+
+Build executable binary:
+
+```sh
+make build
 ```
 
 ## Sources
