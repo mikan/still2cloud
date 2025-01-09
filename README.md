@@ -1,6 +1,8 @@
 still2cloud
 -----------
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/mikan/still2cloud)](https://goreportcard.com/report/github.com/mikan/still2cloud)
+
 Take a still picture from IP camera and upload to Amazon S3 or S3-compatible object storages.
 
 ## Usage
