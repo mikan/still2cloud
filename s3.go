@@ -11,16 +11,20 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-func putS3Object(config Config, path string, content []byte) error {
-	awsConfig, err := newAWSConfig(context.Background(), config)
+func putS3Object(ctx context.Context, config Config, path string, content []byte, noCache bool) error {
+	awsConfig, err := newAWSConfig(ctx, config)
 	if err != nil {
 		return fmt.Errorf("[DEST] failed to load AWS configuration: %w", err)
 	}
-	_, err = newS3Client(config, awsConfig).PutObject(context.Background(), &s3.PutObjectInput{
+	input := &s3.PutObjectInput{
 		Bucket: &config.Destination.Bucket,
 		Key:    &path,
 		Body:   bytes.NewReader(content),
-	})
+	}
+	if noCache {
+		input.CacheControl = aws.String("no-cache")
+	}
+	_, err = newS3Client(config, awsConfig).PutObject(ctx, input)
 	if err != nil {
 		return fmt.Errorf("[DEST] failed to put object: %w", err)
 	}

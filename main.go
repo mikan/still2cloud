@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"flag"
@@ -65,7 +66,7 @@ func still2cloud(config Config, now time.Time) error {
 	path := formatLayout(config.Destination.PathLayout, now, config.Destination.LayoutMode)
 	switch config.Destination.Type {
 	case DestinationTypeS3:
-		err = putS3Object(config, path, content)
+		err = putS3Object(context.Background(), config, path, content, false)
 	case DestinationTypeFile:
 		err = writeFile(path, content)
 	default:
@@ -82,7 +83,7 @@ func still2cloud(config Config, now time.Time) error {
 		}
 		switch config.Destination.Type {
 		case DestinationTypeS3:
-			err = putS3Object(config, config.Destination.LatestFilePath, []byte(path))
+			err = putS3Object(context.Background(), config, config.Destination.LatestFilePath, []byte(path), true)
 		case DestinationTypeFile:
 			err = writeFile(config.Destination.LatestFilePath, []byte(path))
 		}
