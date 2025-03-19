@@ -47,6 +47,8 @@ func still2cloud(config Config, now time.Time) error {
 		content, err = fetchHTTP(config)
 	case SourceTypeFile:
 		content, err = readFile(config.Source.Path)
+	case SourceTypeRTSP:
+		content, err = readRTSP(config.Source.URL, config.Source.Path)
 	default:
 		return fmt.Errorf("[SRC] unsupported source type: %s", config.Source.Type)
 	}

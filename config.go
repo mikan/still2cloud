@@ -4,11 +4,11 @@ package main
 type Config struct {
 	Source struct {
 		Type     SourceType `json:"type"`
-		URL      string     `json:"url"`      // type: http
+		URL      string     `json:"url"`      // type: http, rtsp
 		Auth     AuthType   `json:"auth"`     // type: http
 		User     string     `json:"user"`     // type: http
 		Password string     `json:"password"` // type: http
-		Path     string     `json:"path"`     // type: file
+		Path     string     `json:"path"`     // type: file, rtsp
 	} `json:"src"`
 	Convert struct {
 		Width  int        `json:"width"`
@@ -36,6 +36,7 @@ type SourceType string
 const (
 	SourceTypeHTTP SourceType = "http"
 	SourceTypeFile SourceType = "file"
+	SourceTypeRTSP SourceType = "rtsp"
 )
 
 type DestinationType string

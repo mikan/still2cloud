@@ -99,6 +99,24 @@ Example configuration:
 }
 ```
 
+### RTSP
+
+Example configuration:
+
+```json
+{
+  "src": {
+    "type": "rtsp",
+    "url": "rtsp://user:password@192.168.1.100:554/channel1",
+    "path": "tmp.jpg"
+  },
+  "dest": {
+  }
+}
+```
+
+NOTE: RTSP option requires `ffmpeg` command.
+
 ## Destinations
 
 ### Amazon S3
