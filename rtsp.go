@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"os/signal"
 	"time"
 )
 
@@ -27,7 +26,7 @@ func readRTSP(url, path string) ([]byte, error) {
 }
 
 func runFFMPEG(url, path string) error {
-	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 	cmd := exec.CommandContext(ctx, "ffmpeg", "-y", "-rtsp_transport", "tcp", "-i", url, "-frames:v", "1", "-r", "1", path)
 	cmd.Stdout = os.Stdout
@@ -35,6 +34,6 @@ func runFFMPEG(url, path string) error {
 	cmd.Cancel = func() error {
 		return cmd.Process.Signal(os.Interrupt)
 	}
-	cmd.WaitDelay = 10 * time.Second
+	cmd.WaitDelay = 5 * time.Second
 	return cmd.Run()
 }
