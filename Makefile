@@ -21,8 +21,12 @@ else
 endif
 	GOOS=linux GOARCH=amd64 go build -ldflags "-s -w -X main.ver=$(VER)" -o build/still2cloud.linux-amd64 .
 	GOOS=linux GOARCH=arm64 go build -ldflags "-s -w -X main.ver=$(VER)" -o build/still2cloud.linux-arm64 .
+	GOOS=linux GOARCH=arm GOARM=6 go build -ldflags "-s -w -X main.ver=$(VER)" -o build/still2cloud.linux-arm6 .
+	GOOS=linux GOARCH=arm GOARM=7 go build -ldflags "-s -w -X main.ver=$(VER)" -o build/still2cloud.linux-arm7 .
 	bunzip2 -zf build/still2cloud.linux-amd64
 	bunzip2 -zf build/still2cloud.linux-arm64
+	bunzip2 -zf build/still2cloud.linux-arm6
+	bunzip2 -zf build/still2cloud.linux-arm7
 
 .PHONY: count-go
 count-go: ## Count number of lines of all go codes
