@@ -117,6 +117,23 @@ Example configuration:
 
 NOTE: RTSP option requires `ffmpeg` command.
 
+### Raspberry Pi Camera
+
+Example configuration:
+
+```json
+{
+  "src": {
+    "type": "rpi",
+    "path": "tmp.jpg"
+  },
+  "dest": {
+  }
+}
+```
+
+NOTE: RPi option requires `rpicam-jpeg` command.
+
 ## Destinations
 
 ### Amazon S3
